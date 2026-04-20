@@ -90,7 +90,7 @@ function CartPage() {
             className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white font-semibold transition shadow-card"
             style={{ backgroundColor: "var(--whatsapp)" }}
           >
-            <MessageCircle className="w-5 h-5" /> Checkout via WhatsApp
+            <MessageCircle className="w-5 h-5" /> Order on WhatsApp
           </button>
           <p className="mt-3 text-xs text-center text-muted-foreground">You'll be redirected to WhatsApp to confirm your order.</p>
         </aside>
