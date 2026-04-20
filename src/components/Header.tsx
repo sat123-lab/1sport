@@ -34,8 +34,9 @@ export function Header() {
         }`}
       >
         <div className="container mx-auto px-4 lg:px-6 relative">
-          <div className="flex items-center justify-between h-20 gap-4">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between h-20 gap-4 relative">
+            {/* Left: Menu button (mobile only) + Logo for desktop */}
+            <div className="flex items-center gap-3 flex-1">
               <button
                 onClick={() => setMenuOpen(true)}
                 className="lg:hidden p-2 rounded-lg hover:bg-secondary text-white"
@@ -43,12 +44,23 @@ export function Header() {
               >
                 <Menu className="w-5 h-5" />
               </button>
+              <div className="hidden lg:block">
+                <Logo />
+              </div>
+            </div>
+
+            {/* Center: Logo (mobile) - shifted slightly left to balance with right icons */}
+            <div className="absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden">
               <Logo />
             </div>
 
-            <MegaMenu />
+            {/* Desktop MegaMenu */}
+            <div className="hidden lg:flex items-center justify-center flex-1">
+              <MegaMenu />
+            </div>
 
-            <div className="flex items-center gap-1">
+            {/* Right: Actions */}
+            <div className="flex items-center gap-1 flex-1 justify-end">
               <button onClick={() => setSearchOpen(true)} className="p-2.5 rounded-xl hover:bg-secondary text-white transition" aria-label="Search">
                 <Search className="w-5 h-5" />
               </button>
