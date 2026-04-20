@@ -11,31 +11,30 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[99] bg-black/50 backdrop-blur-sm lg:hidden"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/20 z-[99] lg:hidden"
             onClick={onClose}
           />
-          
-          {/* Side Drawer */}
+          {/* Menu drawer */}
           <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 left-0 h-full w-[85%] max-w-[320px] z-[100] bg-white shadow-2xl lg:hidden"
+            initial={{ opacity: 0, x: "-100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "-100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 200, mass: 1.2 }}
+            className="fixed top-0 left-0 w-80 h-screen z-[100] bg-white shadow-2xl border-r border-gray-200 lg:hidden overflow-hidden"
           >
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
-              <span className="font-display text-xl font-bold text-gray-800">Menu</span>
-              <button onClick={onClose} className="p-2.5 rounded-xl hover:bg-gray-100 transition-colors">
-                <X className="w-5 h-5 text-gray-600" />
-              </button>
-            </div>
-            <div className="overflow-y-auto h-[calc(100vh-80px)] p-4">
+          <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+            <span className="font-display text-lg font-bold text-gray-800">Menu</span>
+            <button onClick={onClose} className="p-2.5 rounded-xl hover:bg-gray-100 transition-colors">
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+          </div>
+          <div className="overflow-y-auto h-screen p-4 pt-1">
             {CATEGORIES.map((cat) => (
               <div key={cat.slug} className="border-b border-gray-100 last:border-b-0">
                 <button

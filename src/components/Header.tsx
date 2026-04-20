@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useIsClient } from "@/hooks/useIsClient";
 import { Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, User, Menu } from "lucide-react";
 import { Logo } from "./Logo";
@@ -13,16 +12,14 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const isClient = useIsClient();
   const { count } = useCart();
 
   useEffect(() => {
-    if (!isClient) return;
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isClient]);
+  }, []);
 
   return (
     <>
@@ -33,7 +30,7 @@ export function Header() {
 
       <header
         className={`sticky top-0 z-50 bg-black transition-shadow duration-300 ${
-          isClient && scrolled ? "shadow-soft" : "border-b border-border"
+          scrolled ? "shadow-soft" : "border-b border-border"
         }`}
       >
         <div className="container mx-auto px-4 lg:px-6 relative">
@@ -75,8 +72,8 @@ export function Header() {
         </div>
       </header>
 
-      {isClient && <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />}
-      {isClient && <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />}
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
 }
